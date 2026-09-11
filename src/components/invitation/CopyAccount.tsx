@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 export function CopyAccount({ number }: { number: string | null }) {
   const [message, setMessage] = useState("");
@@ -23,7 +24,12 @@ export function CopyAccount({ number }: { number: string | null }) {
         disabled={!number}
         onClick={copy}
       >
-        Salin Nomor Rekening <span aria-hidden="true">↗</span>
+        Salin Nomor Rekening{" "}
+        <ArrowUpRight
+          className="ui-arrow"
+          aria-hidden="true"
+          strokeWidth={1.4}
+        />
       </button>
       <p className="inline-feedback" role="status">
         {message}

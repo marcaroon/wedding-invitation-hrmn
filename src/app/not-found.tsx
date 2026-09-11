@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -11,7 +12,12 @@ export default function NotFound() {
       </h1>
       <p>Silakan periksa kembali tautan undangan Anda.</p>
       <Link className="text-link" href="/">
-        Kembali ke awal ↗
+        Kembali ke awal{" "}
+        <ArrowUpRight
+          className="ui-arrow"
+          aria-hidden="true"
+          strokeWidth={1.4}
+        />
       </Link>
     </main>
   );

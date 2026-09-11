@@ -5,9 +5,13 @@ import type { Photo as PhotoData } from "@/types/invitation";
 export function GallerySection({ photos }: { photos: PhotoData[] }) {
   if (!photos.length) return null;
   return (
-    <section className="gallery-section section-pad" id="galeri">
+    <section
+      className="gallery-section section-pad"
+      id="galeri"
+      data-header-tone="light"
+    >
       <Reveal className="gallery-heading">
-        <span className="section-index">06 — Galeri</span>
+        {/* <span className="section-index">Galeri</span> */}
         <h2>
           Yang ingin
           <br />
@@ -19,6 +23,7 @@ export function GallerySection({ photos }: { photos: PhotoData[] }) {
           <Reveal
             className={`gallery-item gallery-item-${index % 4}`}
             key={`${photo.src}-${index}`}
+            variant="image"
           >
             <figure>
               <Photo
@@ -29,7 +34,7 @@ export function GallerySection({ photos }: { photos: PhotoData[] }) {
                     : "(max-width: 767px) 70vw, 45vw"
                 }
               />
-              <figcaption>{String(index + 1).padStart(2, "0")}</figcaption>
+              {/* <figcaption>{String(index + 1).padStart(2, "0")}</figcaption> */}
             </figure>
           </Reveal>
         ))}

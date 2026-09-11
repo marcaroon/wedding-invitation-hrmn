@@ -1,9 +1,15 @@
 import type { Invitation } from "@/types/invitation";
 import { Reveal } from "@/animations/Reveal";
+import { ArrowDown } from "lucide-react";
 
 export function OpeningSection({ invitation }: { invitation: Invitation }) {
   return (
-    <section className="opening section-pad" id="pembuka">
+    <section
+      className="opening section-pad"
+      id="pembuka"
+      data-snap-section
+      data-header-tone="light"
+    >
       <Reveal>
         <span className="eyebrow">
           Pernikahan {invitation.couple.groom.name} &{" "}
@@ -18,14 +24,18 @@ export function OpeningSection({ invitation }: { invitation: Invitation }) {
         </h2>
       </Reveal>
       <Reveal className="opening-bottom" delay={0.2}>
-        <span className="section-index">01 — Awal cerita</span>
+        {/* <span className="section-index">01 — Awal cerita</span> */}
         <p>{invitation.opening.text}</p>
         <a
           href="#mempelai"
           className="scroll-cue"
           aria-label="Gulir ke perkenalan mempelai"
         >
-          ↓
+          <ArrowDown
+            className="ui-arrow"
+            aria-hidden="true"
+            strokeWidth={1.4}
+          />
         </a>
       </Reveal>
       {invitation.quote && (

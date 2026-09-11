@@ -8,9 +8,10 @@ export function PhotoStory({ photos }: { photos: Photo[] }) {
     <section
       className="story-section section-pad"
       aria-labelledby="story-heading"
+      data-header-tone="light"
     >
       <Reveal className="story-heading">
-        <span className="section-index">02 — Tentang kita</span>
+        {/* <span className="section-index">Tentang kita</span> */}
         <h2 id="story-heading">
           Hal-hal sederhana.
           <br />

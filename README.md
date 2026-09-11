@@ -1,10 +1,10 @@
 # Undangan Pernikahan
 
-Undangan editorial untuk Vicky & Roihatul, menggunakan Next.js App Router, TypeScript strict, Tailwind CSS, `next/image`, `next/font`, dan Motion. Seluruh antarmuka, metadata, label aksesibilitas, dan umpan balik menggunakan Bahasa Indonesia.
+Undangan editorial untuk Vicky & Roihatul, menggunakan Next.js App Router, TypeScript strict, Tailwind CSS, `next/image`, `next/font`, Motion, dan ikon Lucide minimal. Seluruh antarmuka, metadata, label aksesibilitas, dan umpan balik menggunakan Bahasa Indonesia.
 
 ## Status konten
 
-Implementasi dapat dijalankan lokal. **Belum siap dibagikan kepada tamu:** foto, tanggal, nama lengkap, orang tua, lokasi, rekening, dan musik belum diberikan. Semua data tersebut memakai placeholder atau `null`; tidak ada data pribadi rekaan. Kutipan tidak ditampilkan sebelum disetujui pasangan. Formulir saat ini berupa simulasi yang secara jelas menyatakan bahwa konfirmasi belum dikirim, tanpa menyimpan data tamu.
+Implementasi dapat dijalankan lokal. **Belum siap dibagikan kepada tamu:** foto, tanggal, data keluarga, lokasi, dan rekening belum lengkap. Data yang sudah diisi dipertahankan; informasi yang belum tersedia memakai placeholder atau `null`. Kutipan tidak ditampilkan sebelum disetujui pasangan. Bagian konfirmasi kehadiran telah dihapus dari alur undangan; tidak ada formulir atau pengumpulan data tamu pada halaman.
 
 ## Menjalankan
 
@@ -42,7 +42,7 @@ public/couples/              Foto dan musik lokal per klien
 tests/                      Pengujian data, tanggal, URL, dan validasi
 ```
 
-Komposisi bagian halaman menggunakan Server Components. State browser dibatasi pada sampul/nama tamu/musik, animasi, penghitung waktu, salin rekening, dan formulir. Server Components diteruskan sebagai `children` ke pembungkus interaktif. Tidak menggunakan database atau Prisma.
+Komposisi bagian halaman menggunakan Server Components. State browser dibatasi pada sampul/nama tamu/musik, header mengambang, animasi, penghitung waktu, dan salin rekening. Server Components diteruskan sebagai `children` ke pembungkus interaktif. Tidak menggunakan database atau Prisma.
 
 ## Mengubah nama dan membuat klien baru
 
@@ -104,7 +104,9 @@ Ubah `events[].venue`, `address`, dan `mapsUrl`. Tautan Google Maps harus HTTPS 
 
 Aktifkan `music.enabled` dan isi `music.src` dengan path audio lokal yang berhak digunakan. Musik baru diputar setelah tombol **Buka Undangan** ditekan. Kontrol kecil dapat menjeda atau memutar kembali; kegagalan pemutaran memiliki pesan tersendiri. Tidak ada audio dimuat ketika musik dinonaktifkan.
 
-## RSVP dan integrasi Supabase nanti
+## Modul RSVP yang tidak ditampilkan
+
+`RSVPSection` tidak lagi diimpor atau dirender oleh `InvitationPage`, dan tautan konfirmasi telah dihapus dari header. Konfigurasi klien memakai `rsvp.enabled: false`. Modul formulir, validasi, dan adapter lama disimpan untuk kemungkinan penggunaan pada klien lain; perubahan lokal pada modul tersebut tetap dipertahankan. Bagian ini hanya referensi jika kelak ingin mengaktifkan ulang fitur dengan memasang komponen ke halaman serta mengubah konfigurasi.
 
 `rsvp.mode: "mock"` menjalankan simulasi 700 ms, tanpa jaringan, database, atau localStorage. Pesan simulasi tetap terlihat. Jangan mengganti pesan simulasi menjadi klaim konfirmasi diterima.
 
@@ -132,9 +134,13 @@ Untuk Supabase, simpan service-role key di environment server tanpa prefiks `NEX
 
 ## Aksesibilitas dan gerak
 
-Sampul menahan scroll dan membuat isi undangan `inert` sampai dibuka. Tab tetap pada tombol pembuka; fokus berpindah ke isi setelah transisi selesai. Navigasi, label, radio, pesan validasi dan status memakai elemen semantik. Isian salah pertama menerima fokus saat submit.
+Sampul menahan scroll dan membuat isi undangan `inert` sampai dibuka. Tab tetap pada tombol pembuka; fokus berpindah ke isi setelah transisi selesai. Navigasi dan umpan balik memakai elemen semantik. Ikon panah Lucide menggunakan `currentColor`, garis 1,4 piksel, dan `aria-hidden` karena label tautan sudah menjelaskan tindakan.
 
-`prefers-reduced-motion` menonaktifkan parallax, sticky stacking, smooth scroll, dan transisi kompleks. Gerak biasa dibatasi pada opacity/transform dan sticky CSS. Layout memakai `svh`, safe-area inset, ukuran target sentuh minimal 44 piksel, dan font input 16 piksel. JavaScript diperlukan untuk membuka dan berinteraksi; ada pesan `noscript`.
+Pembuka, tanggal, foto setelah acara, hadiah, dan penutup ditandai `data-snap-section`. Hook `useSectionSnap` mengukur tinggi aktual bagian setelah perubahan konten, font, atau viewport. Hanya bagian yang muat pada viewport yang mendapatkan `data-snap-fit`, sehingga browser dapat menariknya ke posisi awal dengan `scroll-snap-type: y proximity`. Bagian panjang tetap bebas digulir; tidak ada intersepsi wheel/touch atau pemaksaan perpindahan satu halaman. Atur tanda tersebut di komponen bagian bila komposisi klien berubah.
+
+Header berbentuk kapsul transparan dengan warna dari token tema. `FloatingHeader` membaca `data-header-tone` pada bagian yang sedang dilewati: `light`, `dark`, atau `photo`. Transparansi diatur melalui `--header-bg` pada `.site-header`. Tautan bagian aktif memiliki latar lembut. Header tidak mengubah data klien.
+
+Foto menggunakan reveal bingkai, parallax/zoom ringan, dan tumpukan yang perlahan mengecil ketika foto berikutnya naik. `prefers-reduced-motion` menonaktifkan snap, parallax, sticky stacking, smooth scroll, dan transisi kompleks. Gerak dominan memakai opacity/transform dan sticky CSS; reveal foto memakai clip-path sekali saat masuk layar. Layout memakai `svh`, safe-area inset, dan target sentuh minimal 44 piksel. JavaScript diperlukan untuk membuka dan berinteraksi; ada pesan `noscript`.
 
 ## SEO, pratinjau tautan, dan Vercel
 
@@ -142,11 +148,11 @@ Ubah `seo.title`, `seo.description`, dan `seo.ogImage` (path foto pratinjau loka
 
 Untuk deploy ke Vercel:
 
-1. Lengkapi konten nyata, foto, serta backend konfirmasi jika formulir akan digunakan tamu.
+1. Lengkapi konten nyata dan foto.
 2. Push repository ke GitHub, lalu impor proyek ke Vercel dengan preset Next.js.
 3. Pilih Node.js 22.x, install `npm ci`, dan build `npm run build`; output mengikuti default Next.js.
 4. Tambahkan `NEXT_PUBLIC_SITE_URL` berupa origin HTTPS domain final, tanpa path. Konfigurasi ini mengaktifkan canonical dan URL absolut pratinjau. Tambahkan rahasia backend sebagai environment server bila digunakan.
-5. Deploy dan periksa rute, URL nama tamu, foto, pratinjau WhatsApp, musik, clipboard, serta pengiriman konfirmasi nyata pada perangkat sasaran.
+5. Deploy dan periksa rute, URL nama tamu, foto, pratinjau WhatsApp, musik, clipboard, serta kenyamanan scroll pada perangkat sasaran.
 
 Next.js memerlukan runtime server untuk optimasi `next/image` dan integrasi API di masa depan. Proyek tidak memakai static export. Publikasi belum dilakukan dalam implementasi awal ini.
 

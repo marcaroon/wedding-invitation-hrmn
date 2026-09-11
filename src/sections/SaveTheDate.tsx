@@ -19,9 +19,14 @@ export function SaveTheDate({ date }: { date: Invitation["date"] }) {
         .join(".")
     : "— . — . —";
   return (
-    <section className="date-section section-pad" id="tanggal">
+    <section
+      className="date-section section-pad"
+      id="tanggal"
+      data-snap-section
+      data-header-tone="dark"
+    >
       <Reveal>
-        <span className="eyebrow">03 — Simpan Tanggalnya</span>
+        <span className="eyebrow">Simpan Tanggalnya</span>
         <h2 className="date-art" aria-hidden="true">
           {dateArt}
         </h2>

@@ -5,7 +5,11 @@ import type { Invitation } from "@/types/invitation";
 export function CoupleSection({ invitation }: { invitation: Invitation }) {
   const { groom, bride } = invitation.couple;
   return (
-    <section id="mempelai" className="couple-section section-pad">
+    <section
+      id="mempelai"
+      className="couple-section section-pad"
+      data-header-tone="light"
+    >
       <Reveal className="couple-heading">
         <span className="eyebrow">Dua hati, satu perjalanan</span>
         <h2>
@@ -13,7 +17,7 @@ export function CoupleSection({ invitation }: { invitation: Invitation }) {
           <em>& {bride.name}</em>
         </h2>
       </Reveal>
-      <Reveal className="couple-photo">
+      <Reveal className="couple-photo" variant="image">
         <Photo
           photo={invitation.photos.couple}
           sizes="(max-width: 767px) 88vw, 48vw"

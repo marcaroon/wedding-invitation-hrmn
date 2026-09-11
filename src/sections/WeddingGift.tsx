@@ -5,9 +5,14 @@ import { CopyAccount } from "@/components/invitation/CopyAccount";
 export function WeddingGift({ gift }: { gift: Invitation["gift"] }) {
   if (!gift.enabled) return null;
   return (
-    <section className="gift-section section-pad" id="hadiah">
+    <section
+      className="gift-section section-pad"
+      id="hadiah"
+      data-snap-section
+      data-header-tone="light"
+    >
       <Reveal className="gift-heading">
-        <span className="eyebrow">Tanda kasih</span>
+        {/* <span className="eyebrow">Tanda kasih</span> */}
         <h2>
           Hadiah
           <br />

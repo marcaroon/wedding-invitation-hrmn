@@ -1,17 +1,18 @@
-import type { Invitation, Photo } from "@/types/invitation";
+import type { Invitation } from "@/types/invitation";
+// import type { Invitation, Photo } from "@/types/invitation";
 
-const photo = (placeholder: string): Photo => ({
-  src: null,
-  alt: placeholder,
-  placeholder,
-});
+// const photo = (placeholder: string): Photo => ({
+//   src: null,
+//   alt: placeholder,
+//   placeholder,
+// });
 
 export const vickyRoihatul: Invitation = {
   slug: "vicky-roihatul",
   couple: {
     groom: {
       name: "Vicky",
-      fullName: "[Nama Lengkap Vicky]",
+      fullName: "Vicky Ardi Putra Dani",
       father: "[Nama Ayah Vicky]",
       mother: "[Nama Ibu Vicky]",
     },
@@ -36,21 +37,76 @@ export const vickyRoihatul: Invitation = {
     zoneLabel: "WIB",
   },
   photos: {
-    cover: photo("[Foto Sampul Vicky & Roihatul]"),
-    couple: photo("[Foto Bersama Vicky & Roihatul]"),
+    cover: {
+      src: "/couples/vicky-roihatul/cover/cover.webp",
+      alt: "Foto sampul Vicky dan Roihatul",
+      placeholder: "[Foto Sampul Vicky & Roihatul]",
+      position: "50% 100%",
+    },
+    couple: {
+      src: "/couples/vicky-roihatul/couple/couple.webp",
+      alt: "Foto bersama Vicky dan Roihatul",
+      placeholder: "[Foto Bersama Vicky & Roihatul]",
+      position: "70% 100%",
+    },
     story: [
-      photo("[Foto Prawedding 01]"),
-      photo("[Foto Prawedding 02]"),
-      photo("[Foto Prawedding 03]"),
+      {
+        src: "/couples/vicky-roihatul/gallery/prewed-01.webp",
+        alt: "Foto bersama Vicky dan Roihatul",
+        placeholder: "[Foto Prewedding Vicky & Roihatul]",
+        position: "48% 100%",
+      },
+      {
+        src: "/couples/vicky-roihatul/gallery/prewed-02.webp",
+        alt: "Foto bersama Vicky dan Roihatul",
+        placeholder: "[Foto Prewedding Vicky & Roihatul]",
+        position: "70% 100%",
+      },
+      {
+        src: "/couples/vicky-roihatul/gallery/prewed-03.webp",
+        alt: "Foto bersama Vicky dan Roihatul",
+        placeholder: "[Foto Prewedding Vicky & Roihatul]",
+        position: "50% 100%",
+      },
     ],
-    interlude: photo("[Foto Prawedding Lanskap]"),
-    closing: photo("[Foto Penutup Vicky & Roihatul]"),
+    interlude: {
+      src: "/couples/vicky-roihatul/gallery/sela.webp",
+      alt: "Foto bersama Vicky dan Roihatul",
+      placeholder: "[Foto Landscape Vicky & Roihatul]",
+      position: "48% 100%",
+    },
+    closing: {
+      src: "/couples/vicky-roihatul/closing/closing.webp",
+      alt: "Foto bersama Vicky dan Roihatul",
+      placeholder: "[Foto Prewedding Vicky & Roihatul]",
+      position: "57% 100%",
+    },
   },
   gallery: [
-    photo("[Foto Galeri 01]"),
-    photo("[Foto Galeri 02]"),
-    photo("[Foto Galeri 03]"),
-    photo("[Foto Galeri 04]"),
+    {
+      src: "/couples/vicky-roihatul/gallery/gallery-1.webp",
+      alt: "Foto bersama Vicky dan Roihatul",
+      placeholder: "[Foto Prewedding Vicky & Roihatul]",
+      position: "50% 100%",
+    },
+    {
+      src: "/couples/vicky-roihatul/gallery/gallery-2.webp",
+      alt: "Foto bersama Vicky dan Roihatul",
+      placeholder: "[Foto Prewedding Vicky & Roihatul]",
+      position: "50% 100%",
+    },
+    {
+      src: "/couples/vicky-roihatul/gallery/gallery-3.webp",
+      alt: "Foto bersama Vicky dan Roihatul",
+      placeholder: "[Foto Prewedding Vicky & Roihatul]",
+      position: "50% 50%",
+    },
+    {
+      src: "/couples/vicky-roihatul/gallery/gallery-4.webp",
+      alt: "Foto bersama Vicky dan Roihatul",
+      placeholder: "[Foto Prewedding Vicky & Roihatul]",
+      position: "50% 100%",
+    },
   ],
   events: [
     {
@@ -83,7 +139,7 @@ export const vickyRoihatul: Invitation = {
     ],
     address: null,
   },
-  rsvp: { enabled: true, mode: "mock", endpoint: null, maxGuests: 4 },
+  rsvp: { enabled: false, mode: "mock", endpoint: null, maxGuests: 4 },
   closing:
     "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu. Atas kehadiran dan doa restunya, kami mengucapkan terima kasih.",
   music: { enabled: false, src: null },

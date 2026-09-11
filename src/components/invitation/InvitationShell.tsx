@@ -17,6 +17,8 @@ import {
 import type { Invitation } from "@/types/invitation";
 import { guestFromSearch } from "@/lib/guest";
 import { Photo } from "./Photo";
+import { ArrowUpRight } from "lucide-react";
+import { useSectionSnap } from "@/hooks/useSectionSnap";
 
 const InvitationContext = createContext({
   opened: false,
@@ -41,6 +43,7 @@ export function InvitationShell({
   const reduced = useReducedMotion();
   const hasMusic = invitation.music.enabled && Boolean(invitation.music.src);
   const { groom, bride } = invitation.couple;
+  useSectionSnap(mainRef, opened);
 
   useEffect(() => {
     const updateGuest = () =>
@@ -141,13 +144,17 @@ export function InvitationShell({
                   className="button button-ivory cover-button"
                   onClick={openInvitation}
                 >
-                  Buka Undangan <span aria-hidden="true">↗</span>
+                  Buka Undangan{" "}
+                  <ArrowUpRight
+                    className="ui-arrow"
+                    aria-hidden="true"
+                    strokeWidth={1.4}
+                  />
                 </button>
               </div>
               <noscript>
                 <p className="no-script">
-                  Aktifkan JavaScript untuk membuka undangan dan mengisi
-                  konfirmasi kehadiran.
+                  Aktifkan JavaScript untuk membuka undangan.
                 </p>
               </noscript>
             </motion.div>

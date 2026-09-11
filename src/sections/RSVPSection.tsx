@@ -90,7 +90,7 @@ export function RSVPSection({
           <br />
           Titipkan juga ucapan dan doa untuk perjalanan kami.
         </p>
-        <span className="section-index">05 — Ucapan & Doa</span>
+        {/* <span className="section-index">05 — Ucapan & Doa</span> */}
       </Reveal>
       <Reveal className="rsvp-form-wrap">
         {config.mode === "mock" && (
