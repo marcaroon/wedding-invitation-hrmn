@@ -143,7 +143,10 @@ export const vickyRoihatul: Invitation = {
   rsvp: { enabled: false, mode: "mock", endpoint: null, maxGuests: 4 },
   closing:
     "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu. Atas kehadiran dan doa restunya, kami mengucapkan terima kasih.",
-  music: { enabled: false, src: null },
+  music: {
+    enabled: true,
+    src: "/couples/vicky-roihatul/music/backsound.mp3",
+  },
   theme: {
     background: "#f4f0e8",
     foreground: "#292923",

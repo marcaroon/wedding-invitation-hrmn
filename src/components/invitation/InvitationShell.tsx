@@ -17,7 +17,7 @@ import {
 import type { Invitation } from "@/types/invitation";
 import { guestFromSearch } from "@/lib/guest";
 import { Photo } from "./Photo";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Volume2, VolumeX } from "lucide-react";
 import { useSectionSnap } from "@/hooks/useSectionSnap";
 
 const InvitationContext = createContext({
@@ -37,8 +37,11 @@ export function InvitationShell({
   const [opened, setOpened] = useState(false);
   const [guest, setGuest] = useState(invitation.guest.defaultName);
   const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(false);
+  const [startingMusic, setStartingMusic] = useState(false);
   const [musicMessage, setMusicMessage] = useState("");
   const audioRef = useRef<HTMLAudioElement>(null);
+  const playRequested = useRef(false);
   const mainRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const hasMusic = invitation.music.enabled && Boolean(invitation.music.src);
@@ -65,14 +68,34 @@ export function InvitationShell({
   }, [opened]);
 
   async function playMusic() {
-    if (!audioRef.current) return;
+    if (!audioRef.current || playRequested.current) return;
+    playRequested.current = true;
+    setStartingMusic(true);
+    setMusicMessage("");
     try {
       await audioRef.current.play();
       setPlaying(true);
-      setMusicMessage("");
     } catch {
       setPlaying(false);
       setMusicMessage("Musik belum dapat diputar. Silakan coba kembali.");
+    } finally {
+      playRequested.current = false;
+      setStartingMusic(false);
+    }
+  }
+
+  function toggleMusic() {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (playing || playRequested.current) {
+      // Mute without restarting the song when sound is enabled again.
+      audio.muted = !audio.muted;
+      setMuted(audio.muted);
+    } else {
+      audio.muted = false;
+      setMuted(false);
+      if (audio.error) audio.load();
+      void playMusic();
     }
   }
 
@@ -179,21 +202,39 @@ export function InvitationShell({
             loop
             preload="none"
             onPause={() => setPlaying(false)}
-            onPlay={() => setPlaying(true)}
+            onPlaying={() => setPlaying(true)}
+            onVolumeChange={(event) => setMuted(event.currentTarget.muted)}
+            onError={() => {
+              setPlaying(false);
+              setStartingMusic(false);
+              setMusicMessage(
+                "Musik belum dapat diputar. Silakan coba kembali.",
+              );
+            }}
           />
         )}
         {opened && hasMusic && (
           <div className="music-control">
             <button
               type="button"
-              aria-label={playing ? "Jeda musik" : "Putar musik"}
-              aria-pressed={playing}
-              onClick={() => {
-                if (playing) audioRef.current?.pause();
-                else void playMusic();
-              }}
+              aria-label={
+                playing || startingMusic ? "Bisukan musik" : "Putar musik"
+              }
+              aria-pressed={playing || startingMusic ? muted : undefined}
+              title={
+                playing || startingMusic
+                  ? muted
+                    ? "Aktifkan suara"
+                    : "Bisukan musik"
+                  : "Putar musik"
+              }
+              onClick={toggleMusic}
             >
-              <span aria-hidden="true">{playing ? "Ⅱ" : "♪"}</span>
+              {!muted && (playing || startingMusic) ? (
+                <Volume2 size={18} strokeWidth={1.4} aria-hidden="true" />
+              ) : (
+                <VolumeX size={18} strokeWidth={1.4} aria-hidden="true" />
+              )}
             </button>
             <span role="status">{musicMessage}</span>
           </div>

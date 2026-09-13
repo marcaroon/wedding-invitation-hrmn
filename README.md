@@ -102,7 +102,11 @@ Ubah `events[].venue`, `address`, dan `mapsUrl`. Tautan Google Maps harus HTTPS 
 
 `gift.enabled` mengatur bagian hadiah. `gift.accounts` menerima satu atau beberapa `{ bank, holder, number }`. Nomor rekening harus berupa string agar angka nol di depan tidak hilang. Jika `number: null`, tombol salin dinonaktifkan. `gift.address` opsional untuk hadiah fisik. Clipboard memerlukan HTTPS atau localhost; kegagalannya ditangani dengan pesan Indonesia agar nomor bisa disalin manual.
 
-Aktifkan `music.enabled` dan isi `music.src` dengan path audio lokal yang berhak digunakan. Musik baru diputar setelah tombol **Buka Undangan** ditekan. Kontrol kecil dapat menjeda atau memutar kembali; kegagalan pemutaran memiliki pesan tersendiri. Tidak ada audio dimuat ketika musik dinonaktifkan.
+Backsound sudah diaktifkan dalam konfigurasi. Letakkan berkas MP3 dengan nama **`backsound.mp3`** di `public/couples/vicky-roihatul/music/`. Alamat `music.src` sudah diarahkan ke `/couples/vicky-roihatul/music/backsound.mp3`; sesuaikan alamat ini jika nama berkas diubah. Tidak perlu menambahkan `public` pada alamat `src`.
+
+Musik mulai setelah tombol **Buka Undangan** ditekan dan berulang otomatis. Tombol speaker minimalis di kanan bawah membisukan atau mengaktifkan suara tanpa mengulang lagu dari awal. Posisi tombol memperhitungkan safe area ponsel, dan tautan penutup diberi ruang agar tidak tertutup tombol. Jika musik gagal dimuat, pesan Indonesia muncul dan tombol dapat digunakan untuk mencoba pemutaran kembali. Selama MP3 belum ditempatkan, suara belum dapat diputar. Setelah menyalin MP3, muat ulang undangan dan tekan **Buka Undangan** untuk memeriksa suara dan tombol mute.
+
+Ubah `music.enabled` menjadi `false` untuk menonaktifkan backsound dan menyembunyikan tombol. Audio menggunakan `preload="none"` dan tidak diputar sebelum interaksi pengguna.
 
 ## Modul RSVP yang tidak ditampilkan
 

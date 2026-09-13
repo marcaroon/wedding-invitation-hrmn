@@ -1011,18 +1011,35 @@ img {
 }
 .music-control {
   position: fixed;
-  bottom: max(1rem, env(safe-area-inset-bottom));
-  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  right: calc(1rem + env(safe-area-inset-right));
   z-index: 50;
 }
 .music-control button {
+  display: grid;
+  place-items: center;
   border: 1px solid var(--line);
   background: var(--ivory);
   color: var(--ink);
   border-radius: 50%;
   height: 44px;
   width: 44px;
-  font-size: 1.2rem;
+  padding: 0;
+  box-shadow: 0 3px 16px #14181012;
+  transition:
+    background-color 0.25s,
+    color 0.25s;
+}
+.music-control button[aria-pressed="true"] {
+  color: var(--gold);
+}
+@media (hover: hover) {
+  .music-control button:hover {
+    background: var(--stone);
+  }
+}
+.invitation:has(.music-control) .closing-bottom {
+  padding-inline-end: calc(3.5rem + env(safe-area-inset-right));
 }
 .music-control [role="status"]:not(:empty) {
   position: absolute;
