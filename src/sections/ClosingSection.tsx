@@ -3,6 +3,7 @@ import { Reveal } from "@/animations/Reveal";
 import type { Invitation } from "@/types/invitation";
 import { ArrowUp } from "lucide-react";
 import { ParallaxImage } from "@/animations/ParallaxImage";
+import { BrandCredit } from "@/components/invitation/BrandCredit";
 
 export function ClosingSection({ invitation }: { invitation: Invitation }) {
   return (
@@ -28,6 +29,7 @@ export function ClosingSection({ invitation }: { invitation: Invitation }) {
           <em>& {invitation.couple.bride.name}</em>
         </h2>
         <span className="closing-thanks">Terima kasih</span>
+        <BrandCredit placement="closing" />
       </Reveal>
       <div className="closing-bottom">
         {/* <span>Undangan Pernikahan</span> */}

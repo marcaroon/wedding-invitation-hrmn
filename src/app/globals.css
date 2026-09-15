@@ -345,6 +345,59 @@ img {
 .cover-button {
   min-width: 230px;
 }
+.cover-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.85rem;
+}
+.brand-credit {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  color: var(--ivory);
+  line-height: 1.4;
+  text-align: center;
+}
+.brand-credit-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--ivory) 85%, transparent);
+}
+.brand-credit-name {
+  font-family: var(--font-display), serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+.brand-credit-instagram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-size: 0.8125rem;
+  color: inherit;
+  text-underline-offset: 0.25em;
+}
+.brand-credit-instagram svg {
+  flex-shrink: 0;
+}
+.brand-credit-instagram:hover span,
+.brand-credit-instagram:focus-visible span {
+  text-decoration: underline;
+}
+.brand-credit-closing {
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 1.75rem;
+}
+.brand-credit-closing .brand-credit-name {
+  font-size: 1.75rem;
+}
 .no-script {
   position: relative;
   color: var(--ivory);
@@ -1116,6 +1169,11 @@ img {
     font-size: 1rem;
   }
   .cover-button {
+    width: 100%;
+    max-width: 330px;
+    align-self: center;
+  }
+  .cover-actions {
     width: 100%;
     max-width: 330px;
     align-self: center;

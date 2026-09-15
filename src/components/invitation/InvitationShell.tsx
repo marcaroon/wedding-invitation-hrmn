@@ -19,6 +19,7 @@ import { guestFromSearch } from "@/lib/guest";
 import { Photo } from "./Photo";
 import { ArrowUpRight, Volume2, VolumeX } from "lucide-react";
 import { useSectionSnap } from "@/hooks/useSectionSnap";
+import { BrandCredit } from "./BrandCredit";
 
 const InvitationContext = createContext({
   opened: false,
@@ -128,8 +129,18 @@ export function InvitationShell({
               }}
               onKeyDown={(event) => {
                 if (event.key === "Tab") {
-                  event.preventDefault();
-                  event.currentTarget.querySelector("button")?.focus();
+                  const controls = event.currentTarget.querySelectorAll<HTMLElement>(
+                    "button:not([disabled]), a[href]",
+                  );
+                  const first = controls[0];
+                  const last = controls[controls.length - 1];
+                  if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last?.focus();
+                  } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first?.focus();
+                  }
                 }
               }}
             >
@@ -163,17 +174,20 @@ export function InvitationShell({
                   </p>
                   <p className="guest-name">{guest}</p>
                 </div>
-                <button
-                  className="button button-ivory cover-button"
-                  onClick={openInvitation}
-                >
-                  Buka Undangan{" "}
-                  <ArrowUpRight
-                    className="ui-arrow"
-                    aria-hidden="true"
-                    strokeWidth={1.4}
-                  />
-                </button>
+                <div className="cover-actions">
+                  <button
+                    className="button button-ivory cover-button"
+                    onClick={openInvitation}
+                  >
+                    Buka Undangan{" "}
+                    <ArrowUpRight
+                      className="ui-arrow"
+                      aria-hidden="true"
+                      strokeWidth={1.4}
+                    />
+                  </button>
+                  <BrandCredit placement="cover" />
+                </div>
               </div>
               <noscript>
                 <p className="no-script">
