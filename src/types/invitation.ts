@@ -49,6 +49,7 @@ export type Invitation = {
   gift: {
     enabled: boolean;
     accounts: { bank: string; holder: string; number: string | null }[];
+    recipient: string | null;
     address: string | null;
   };
   rsvp: {

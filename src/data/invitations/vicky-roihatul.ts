@@ -118,7 +118,8 @@ export const vickyRoihatul: Invitation = {
       timePlaceholder: "[Waktu Akad]",
       venue: "Tawangagung, Ampelgading",
       address: "RT 17 RW 06, Tawangagung, Ampelgading, Kabupaten Malang",
-      mapsUrl: null,
+      mapsUrl:
+        "https://www.google.com/maps?q=-8.2096697,112.8656407&z=17&hl=en",
     },
     {
       id: "resepsi",
@@ -129,7 +130,8 @@ export const vickyRoihatul: Invitation = {
       timePlaceholder: "[Waktu Resepsi]",
       venue: "Tawangagung, Ampelgading",
       address: "RT 17 RW 06, Tawangagung, Ampelgading, Kabupaten Malang",
-      mapsUrl: null,
+      mapsUrl:
+        "https://www.google.com/maps?q=-8.2096697,112.8656407&z=17&hl=en",
     },
   ],
   gift: {
@@ -138,6 +140,7 @@ export const vickyRoihatul: Invitation = {
       { bank: "Aladin", holder: "Roihatul Jannah", number: "50340519993" },
       { bank: "GoPay", holder: "Vicky Ardi", number: "081249812542" },
     ],
+    recipient: "Vicky Ardi",
     address: "RT 17 RW 06, Tawangagung, Ampelgading, Kabupaten Malang",
   },
   rsvp: { enabled: false, mode: "mock", endpoint: null, maxGuests: 4 },

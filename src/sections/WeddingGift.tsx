@@ -38,6 +38,9 @@ export function WeddingGift({ gift }: { gift: Invitation["gift"] }) {
         {gift.address && (
           <div className="gift-address">
             <h3>Alamat Pengiriman Hadiah</h3>
+            {gift.recipient && (
+              <p className="gift-recipient">Atas nama {gift.recipient}</p>
+            )}
             <p>{gift.address}</p>
           </div>
         )}
