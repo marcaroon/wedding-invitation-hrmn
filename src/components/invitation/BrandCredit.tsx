@@ -5,10 +5,10 @@ export function BrandCredit({ placement }: { placement: "cover" | "closing" }) {
       <span className="brand-credit-name">Harmonia</span>
       <a
         className="brand-credit-instagram"
-        href="https://www.instagram.com/harmonistories/"
+        href="https://www.instagram.com/harmoniastories/"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Instagram Harmonia @harmonistories, membuka tab baru"
+        aria-label="Instagram Harmonia @harmoniastories, membuka tab baru"
       >
         <svg
           width="16"
